@@ -6,7 +6,6 @@ import ModalAddProfile from "./ui/ModalAddProfile"
 const About = () => {
   const [isOpenModal, setIsOpenModal] = useState(false)
   const toggleModal = () => setIsOpenModal(!isOpenModal)
-  console.log(isOpenModal)
 
   return (
     <div className="bg-white bg-opacity-5 rounded-lg mt-5 p-5">

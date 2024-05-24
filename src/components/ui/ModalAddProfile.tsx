@@ -2,6 +2,8 @@ import Image from "next/image"
 import React from "react"
 import img from "../../../public/img.png"
 import ProfileInput from "./ProfileInput"
+import DateInput from "./DateInput"
+import SelectInput from "./SelectInput"
 
 type ModalProps = {
   isOpen: boolean
@@ -42,12 +44,10 @@ const ModalAddProfile = ({ isOpen, toggleModal }: ModalProps) => {
 
         <form className="space-y-4">
           <ProfileInput label="Display name" placeholder="Enter your name" />
-          <ProfileInput label="Gender" placeholder="Select Gender" />
-          <ProfileInput label=" BirthDay" placeholder="Birtday" />
-          <ProfileInput label="Horoscope" placeholder="Enter your name" />
-          <ProfileInput label="Zodiac" placeholder="Enter your name" />
-          <ProfileInput label="Height" placeholder="Enter your name" />
-          <ProfileInput label="Weight" placeholder="Enter your name" />
+          <SelectInput label="Gender" />
+          <ProfileInput type="date" label=" BirthDay" placeholder="Birtday" />
+          <ProfileInput label="Height" type="number" placeholder="Add height" />
+          <ProfileInput label="Weight" type="number" placeholder="Add weight" />
         </form>
 
         <div className="mt-4 flex justify-end">

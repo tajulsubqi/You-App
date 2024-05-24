@@ -1,4 +1,4 @@
-import { AuthType } from "@/types/AuthType"
+import { AuthType } from "@/types/UserType"
 
 export const validateLoginForm = (formData: AuthType) => {
   if (!formData.email) {

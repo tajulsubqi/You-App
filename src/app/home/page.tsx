@@ -1,10 +1,26 @@
-import React from "react"
-import { IoChevronBackOutline } from "react-icons/io5"
+"use client"
 import About from "@/components/About"
 import Interest from "@/components/Interest"
 import JumbotronProfile from "@/components/JumbotronProfile"
+import { jwtDecode } from "jwt-decode"
+import { useRouter } from "next/navigation"
+import { useEffect, useState } from "react"
+import { IoChevronBackOutline } from "react-icons/io5"
+
+type Session = {
+  username: string
+}
 
 const HomePage = () => {
+  const router = useRouter()
+  const [session, setSession] = useState<Session | null>(null)
+
+  useEffect(() => {
+    const token = localStorage.getItem("token")
+    token ? setSession(jwtDecode<Session>(token)) : router.push("/login")
+  }, [])
+  console.log(session)
+
   return (
     <div className="w-full min-h-screen bg-dark text-white">
       <div className="w-full flex items-center text-sm pt-10">
@@ -13,13 +29,13 @@ const HomePage = () => {
           <p>back</p>
         </div>
         <div className="flex-1 text-center">
-          <p>@jhondoe</p>
+          <p>@{session?.username}</p>
         </div>
         <div className="flex-1 text-right">---</div>
       </div>
 
       <div className="mt-4 px-3">
-        <JumbotronProfile />
+        <JumbotronProfile username={session?.username} />
         <About />
         <Interest />
       </div>

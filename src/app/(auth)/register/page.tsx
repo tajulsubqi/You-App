@@ -1,59 +1,12 @@
 "use client"
-import React, { useState } from "react"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import Link from "next/link"
-import { IoChevronBackOutline } from "react-icons/io5"
 import Button from "@/components/ui/Button"
 import Input from "@/components/ui/Input"
-import { Api, setAuthorization } from "@/libs/axiosInstance"
-import { useRouter } from "next/navigation"
-import toast from "react-hot-toast"
-import { AuthType } from "@/types/AuthType"
-import { validateRegisterForm } from "@/utils/AuthValidate"
+import useRegister from "@/hooks/useRegister"
+import Link from "next/link"
+import { IoChevronBackOutline } from "react-icons/io5"
 
 const RegisterPage = () => {
-  const router = useRouter()
-  const queryClient = useQueryClient()
-
-  const [formData, setFormData] = useState<AuthType | any>({
-    email: "",
-    username: "",
-    password: "",
-    confirmPassword: "",
-  })
-
-  const mutation = useMutation({
-    mutationFn: (data) => Api.post("/register", data),
-    onSuccess: (response) => {
-      queryClient.invalidateQueries({ queryKey: ["user"] })
-      const token = response.data.token
-      setAuthorization(token)
-      localStorage.setItem("token", token)
-      setFormData({
-        email: "",
-        username: "",
-        password: "",
-        confirmPassword: "",
-      })
-      toast.success("Register success")
-      router.push("/login")
-    },
-  })
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
-  }
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const errorMessage = validateRegisterForm(formData)
-    if (errorMessage) {
-      toast.error(errorMessage)
-      return
-    }
-    mutation.mutate(formData)
-  }
+  const { formData, handleChange, handleSubmit } = useRegister()
 
   return (
     <>

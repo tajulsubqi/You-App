@@ -1,56 +1,12 @@
 "use client"
 import Button from "@/components/ui/Button"
 import Input from "@/components/ui/Input"
-import { Api, setAuthorization } from "@/libs/axiosInstance"
-import { AuthType } from "@/types/AuthType"
-import { validateLoginForm } from "@/utils/AuthValidate"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import useLogin from "@/hooks/useLogin"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import toast from "react-hot-toast"
 import { IoChevronBackOutline } from "react-icons/io5"
 
 const LoginPage = () => {
-  const router = useRouter()
-  const query = useQueryClient()
-
-  const [formData, setFormData] = useState<AuthType | any>({
-    username: "",
-    email: "",
-    password: "",
-  })
-
-  const mutation = useMutation({
-    mutationFn: (data) => Api.post("/login", data),
-    onSuccess: (response) => {
-      query.invalidateQueries({ queryKey: ["user"] })
-      const token = response.data.access_token
-      setAuthorization(token)
-      localStorage.setItem("token", token)
-      console.log(response.data)
-      toast.success("Login success")
-      router.push("/")
-    },
-    onError: (error: any) => {
-      toast.error(error.response?.data.message)
-    },
-  })
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
-    setFormData({ ...formData, [name]: value })
-  }
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const errorMessage = validateLoginForm(formData)
-    if (errorMessage) {
-      toast.error(errorMessage)
-      return
-    }
-    mutation.mutate(formData)
-  }
+  const { formData, handleChange, handleSubmit } = useLogin()
 
   return (
     <>
