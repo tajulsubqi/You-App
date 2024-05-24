@@ -2,28 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: white;
+}
+
+.modal {
+  @apply fixed inset-0 flex px-1 items-center justify-center z-50 transition-opacity duration-300;
+}
+
+.modal-open {
+  @apply opacity-100;
+}
+
+.modal-closed {
+  @apply opacity-0 pointer-events-none;
+}
+
+.modal-container {
+  @apply bg-secondary py-6 px-4 rounded-lg shadow-lg max-w-md w-full transform transition-transform duration-300;
+}
+
+.modal-open-transform {
+  @apply translate-y-0;
+}
+
+.modal-closed-transform {
+  @apply translate-y-4;
 }
 
 @layer utilities {
