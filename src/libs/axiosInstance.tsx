@@ -11,7 +11,22 @@ export const setAuthorization = (token: string) => {
   Api.defaults.headers.common["Authorization"] = `Bearer ${token}`
 }
 
-// Check if we are in the browser before accessing localStorage
+Api.interceptors.request.use(
+  (config) => {
+    if (typeof window !== "undefined") {
+      const token = localStorage.getItem("token")
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+      }
+    }
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  },
+)
+
+// Set the token if it exists in localStorage
 if (typeof window !== "undefined") {
   const token = localStorage.getItem("token")
   if (token) {

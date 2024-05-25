@@ -1,7 +1,7 @@
 "use client"
 import Button from "@/components/ui/Button"
 import Input from "@/components/ui/Input"
-import useRegister from "@/hooks/useRegister"
+import useRegister from "@/hooks/auth/useRegister"
 import Link from "next/link"
 import { IoChevronBackOutline } from "react-icons/io5"
 

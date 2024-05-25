@@ -1,10 +1,6 @@
-type SelectInputProps = {
-  label: string
-  value?: string
-  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void
-}
+import { SelectType } from "@/types/SelectType"
 
-const SelectInput = ({ label, value, onChange }: SelectInputProps) => {
+const SelectInput = ({ label, value, onChange }: SelectType) => {
   return (
     <div className="flex items-center">
       <label className="w-1/3 text-sm pr-4 text-slate-400">{label}:</label>

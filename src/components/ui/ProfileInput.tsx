@@ -1,14 +1,7 @@
-type InputProps = {
-  label: string
-  placeholder: string
-  name?: string
-  value?: string
-  type?: string
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-}
+import { ProfileInputType } from "@/types/ProfileInputType"
 
-const ProfileInput = (Props: InputProps) => {
-  const { label, placeholder, name, value, type, onChange } = Props
+const ProfileInput = (Props: ProfileInputType) => {
+  const { label, placeholder, name, value, type, disabled, onChange } = Props
 
   return (
     <>
@@ -18,6 +11,7 @@ const ProfileInput = (Props: InputProps) => {
           onChange={onChange}
           value={value}
           name={name}
+          disabled={disabled}
           type={type}
           className="w-2/3 rounded-md py-2 px-3 text-sm outline-none bg-slate-700 placeholder:text-end"
           placeholder={placeholder}

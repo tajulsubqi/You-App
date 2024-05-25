@@ -1,8 +1,14 @@
+import { ProfileData } from "@/types/ProfileDataType"
 import Link from "next/link"
 import React from "react"
 import { CiEdit } from "react-icons/ci"
 
-const Interest = () => {
+type Props = {
+  profileData: ProfileData
+}
+
+const Interest = ({ profileData }: Props) => {
+  console.log(profileData)
   return (
     <div className="bg-white bg-opacity-5 rounded-lg mt-5 p-5">
       <div className="flex justify-between items-center">
@@ -18,9 +24,9 @@ const Interest = () => {
         {/* <p className="text-slate-400">Add in your interest to find a better match</p> */}
 
         <div className="flex flex-wrap gap-3">
-          <p className="px-4 py-1 bg-white bg-opacity-15 rounded-full">Music</p>
-          <p className="px-4 py-1 bg-white bg-opacity-15 rounded-full">Music</p>
-          <p className="px-4 py-1 bg-white bg-opacity-15 rounded-full">Music</p>
+          <p className="px-4 py-1 bg-white bg-opacity-15 rounded-full">
+            {profileData.interests}
+          </p>
         </div>
       </div>
     </div>

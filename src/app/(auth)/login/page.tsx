@@ -1,7 +1,7 @@
 "use client"
 import Button from "@/components/ui/Button"
 import Input from "@/components/ui/Input"
-import useLogin from "@/hooks/useLogin"
+import useLogin from "@/hooks/auth/useLogin"
 import Link from "next/link"
 import { IoChevronBackOutline } from "react-icons/io5"
 

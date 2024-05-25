@@ -1,38 +1,31 @@
 "use client"
 import { Api, setAuthorization } from "@/libs/axiosInstance"
-import { AuthType } from "@/types/UserType"
-import { validateLoginForm } from "@/utils/AuthFormValidation"
+import { UserType } from "@/types/UserType"
+import { validateRegisterForm } from "@/utils/AuthFormValidation"
 import { useMutation } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
+import React, { useState } from "react"
 import toast from "react-hot-toast"
 
-const useLogin = () => {
+const useRegister = () => {
   const router = useRouter()
-  const [formData, setFormData] = useState<AuthType | any>({
-    username: "",
+
+  const [formData, setFormData] = useState<UserType | any>({
     email: "",
+    username: "",
     password: "",
+    confirmPassword: "",
   })
 
-  useEffect(() => {
-    const token = localStorage.getItem("token")
-    if (token) {
-      router.push("/")
-    }
-  }, [])
-
   const mutation = useMutation({
-    mutationFn: (data: AuthType) => Api.post("/login", data),
+    mutationFn: (data) => Api.post("/register", data),
     onSuccess: (response) => {
-      const token = response.data.access_token
-      setAuthorization(token)
-      localStorage.setItem("token", token)
-      toast.success("Login success")
-      router.push("/")
+      toast.success("Register success")
+      router.push("/login")
+      console.log(response.data)
     },
-    onError: (error: any) => {
-      toast.error(error.response?.data.message)
+    onError: (error) => {
+      throw error
     },
   })
 
@@ -43,7 +36,7 @@ const useLogin = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const errorMessage = validateLoginForm(formData)
+    const errorMessage = validateRegisterForm(formData)
     if (errorMessage) {
       toast.error(errorMessage)
       return
@@ -58,4 +51,4 @@ const useLogin = () => {
   }
 }
 
-export default useLogin
+export default useRegister

@@ -1,7 +1,13 @@
+import { ProfileData } from "@/types/ProfileDataType"
 import Image from "next/image"
 import img from "../../public/img.png"
 
-const JumbotronProfile = ({ username }: any) => {
+interface JumbotronProfileProps {
+  username: string
+  profileData: ProfileData
+}
+
+const JumbotronProfile = ({ username, profileData }: JumbotronProfileProps) => {
   return (
     <div className="relative">
       <Image
@@ -15,9 +21,13 @@ const JumbotronProfile = ({ username }: any) => {
         <p>@{username}</p>
         <p className="text-sm text-slate-300">male</p>
 
-        <div className="flex gap-x-3 mt-3">
-          <p className="bg-gray-700 rounded-full px-3 py-1 text-sm">virgo</p>
-          <p className="bg-gray-700 rounded-full px-3 py-1 text-sm">virgo</p>
+        <div className="flex gap-x-2 mt-3">
+          <p className="bg-gray-800 rounded-full px-4 py-2 text-sm">
+            {profileData.zodiac || "N/A"}
+          </p>
+          <p className="bg-gray-800 rounded-full px-4 py-2 text-sm">
+            {profileData.horoscope || "N/A"}
+          </p>
         </div>
       </div>
     </div>

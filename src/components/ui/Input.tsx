@@ -1,16 +1,9 @@
 "use client"
+import { InputType } from "@/types/InputType"
 import React, { useState } from "react"
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 
-type InputProps = {
-  type: string
-  placeholder: string
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
-  value?: string
-  name?: string
-}
-
-const Input = ({ type, placeholder, onChange, value, name }: InputProps) => {
+const Input = ({ type, placeholder, onChange, value, name }: InputType) => {
   const [inputType, setInputType] = useState(type)
 
   const togglePasswordVisibility = () => {
