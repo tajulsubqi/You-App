@@ -18,13 +18,13 @@ const LoginPage = () => {
       <div className="pt-12 px-4">
         <h2 className="text-2xl ms-4 font-bold mb-5">Login</h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          <Input
+          {/* <Input
             onChange={handleChange}
             name="username"
             value={formData.username}
             placeholder="Enter Username"
             type="text"
-          />
+          /> */}
           <Input
             onChange={handleChange}
             name="email"

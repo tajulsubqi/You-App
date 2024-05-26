@@ -20,23 +20,29 @@ const HomePage = () => {
   const toggleModal = () => setIsModalOpen(!isModalOpen)
 
   const { data, isLoading } = useQuery({
-    queryKey: ["about"],
+    queryKey: ["getProfile"],
     queryFn: async () => {
-      const token = localStorage.getItem("token")
-      const response = await Api.get("/getProfile", {
-        headers: {
-          "x-access-token": token,
-        },
-      })
-      return response.data
+      try {
+        const token = localStorage.getItem("token")
+        const response = await Api.get("/getProfile", {
+          headers: {
+            "x-access-token": `${token}`,
+          },
+        })
+        console.log(response.data)
+        return response.data
+      } catch (error) {
+        throw new Error("Failed to fetch profile data")
+      }
     },
   })
-  const profileData: ProfileData = data?.data || {}
 
   useEffect(() => {
     const token = localStorage.getItem("token")
     token ? setSession(jwtDecode<SessionType>(token)) : router.push("/login")
   }, [])
+
+  const profileData: ProfileData = data?.data ?? {}
 
   return (
     <div className="w-full min-h-screen bg-dark text-white">
@@ -59,7 +65,7 @@ const HomePage = () => {
       <div className="mt-4 px-3">
         <JumbotronProfile username={session?.username} profileData={profileData} />
         <About profileData={profileData} isLoading={isLoading} />
-        <Interest profileData={profileData} />
+        <Interest />
       </div>
 
       <ProfileModal isOpen={isModalOpen} toggleModal={toggleModal} session={session} />

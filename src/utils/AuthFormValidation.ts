@@ -1,6 +1,6 @@
-import { AuthType } from "@/types/UserType"
+import { UserType } from "@/types/UserType"
 
-export const validateLoginForm = (formData: AuthType) => {
+export const validateLoginForm = (formData: UserType) => {
   if (!formData.email) {
     return "Email is required"
   }
@@ -13,7 +13,7 @@ export const validateLoginForm = (formData: AuthType) => {
   return null
 }
 
-export const validateRegisterForm = (formData: AuthType) => {
+export const validateRegisterForm = (formData: UserType) => {
   if (!formData.email) {
     return "Email is required"
   }

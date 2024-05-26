@@ -22,7 +22,6 @@ const useRegister = () => {
     onSuccess: (response) => {
       toast.success("Register success")
       router.push("/login")
-      console.log(response.data)
     },
     onError: (error) => {
       throw error

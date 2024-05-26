@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import { Poppins } from "next/font/google"
-import "./globals.css"
-import Provider from "./provider"
 import { Toaster } from "react-hot-toast"
+import StoreProvider from "./StoreProvider"
+import "./globals.css"
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] })
 
@@ -23,19 +23,19 @@ export default function RootLayout({
           toastOptions={{
             success: {
               style: {
-                background: "rgb(22, 163, 74)",
-                color: "#fff",
+                background: "white",
+                color: "green",
               },
             },
             error: {
               style: {
-                background: "rgb(220, 38, 38)",
-                color: "#fff",
+                background: "tomato",
+                color: "red",
               },
             },
           }}
         />
-        <Provider>{children}</Provider>
+        <StoreProvider>{children}</StoreProvider>
       </body>
     </html>
   )

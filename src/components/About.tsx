@@ -31,34 +31,70 @@ const About = ({ profileData, isLoading }: AboutProps) => {
       ) : (
         <div className="flex flex-col mt-5 text-sm gap-y-3">
           <p className="text-slate-400">
-            Display name :{" "}
-            <span className="ml-2 text-white">{profileData.name || "N/A"}</span>
+            Display name:{" "}
+            <span className="ml-2 text-white">
+              {profileData.name ? (
+                profileData.name
+              ) : (
+                <span>
+                  <span className="ml-1 text-gray-500 italic">______</span>
+                </span>
+              )}
+            </span>
           </p>
+
           <p className="text-slate-400">
             Birthday :{" "}
+            {profileData.birthday ? (
+              <span className=" ml-2 text-white">
+                {profileData.birthday} (Age {calculateAge(profileData.birthday)})
+              </span>
+            ) : (
+              <span className="ml-1 text-gray-500 italic">______</span>
+            )}
+          </p>
+
+          <p className="text-slate-400">
+            Horoscope:{" "}
             <span className="ml-2 text-white">
-              {profileData.birthday || "N/A"} (Age{" "}
-              {profileData.birthday ? calculateAge(profileData.birthday) : "N/A"})
+              {profileData.horoscope ? (
+                profileData.horoscope
+              ) : (
+                <span className="ml-1 text-gray-500 italic">______</span>
+              )}
             </span>
           </p>
+
           <p className="text-slate-400">
-            Horoscope :{" "}
-            <span className="ml-2 text-white">{profileData.horoscope || "N/A"}</span>
-          </p>
-          <p className="text-slate-400">
-            Zodiac :{" "}
-            <span className="ml-2 text-white">{profileData.zodiac || "N/A"}</span>
-          </p>
-          <p className="text-slate-400">
-            Height :{" "}
+            Zodiac:{" "}
             <span className="ml-2 text-white">
-              {profileData.height ? `${profileData.height} cm` : "N/A"}
+              {profileData.zodiac ? (
+                profileData.zodiac
+              ) : (
+                <span className="ml-1 text-gray-500 italic">______</span>
+              )}
             </span>
           </p>
+
           <p className="text-slate-400">
-            Weight :{" "}
+            Height:{" "}
             <span className="ml-2 text-white">
-              {profileData.weight ? `${profileData.weight} kg` : "N/A"}
+              {profileData.height ? (
+                `${profileData.height} cm`
+              ) : (
+                <span className="ml-1 text-gray-500 italic">______</span>
+              )}
+            </span>
+          </p>
+
+          <p className="text-slate-400">
+            Weight:{" "}
+            <span className="ml-2 text-white">
+              {profileData.weight ? (
+                `${profileData.weight} kg`
+              ) : (
+                <span className="ml-1 text-gray-500 italic">______</span>
+              )}
             </span>
           </p>
         </div>
